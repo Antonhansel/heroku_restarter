@@ -7,7 +7,7 @@ namespace :herokuapp do
   task :analyze do
 	response = heroku.get_logs(ENV['HEROKU_APP_NAME'])
 	res = HTTP.get(response.body).body.to_s
-	if res.include? "Error R14 (Memory quota exceeded)"
+	if res.include? ENV['HEROKU_ERROR']
 	   puts "R14 found! Starting task: 'restart'"
 	   Rake::Task['herokuapp:restart'].invoke
 	end
