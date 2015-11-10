@@ -1,0 +1,16 @@
+GEM
+  specs:
+    excon (0.45.4)
+    heroku-api (0.3.23)
+      excon (~> 0.44)
+      multi_json (~> 1.8)
+    multi_json (1.10.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  heroku-api
+
+BUNDLED WITH
+   1.10.6
