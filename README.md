@@ -5,4 +5,4 @@ By the way, I suck at ruby
 
 ## Todo
 
-Find a way to measure a treshold (instead of just killing the app whenever a R14 shows up)
+Find a way to measure a frequency treshold (instead of just killing the app whenever a R14 shows up)
