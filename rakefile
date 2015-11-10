@@ -1,10 +1,14 @@
 require 'heroku-api'
 
-namespace :heroku do
-  desc 'restarts all the heroku dynos so we can control when they restart'
-  task :implode do
-    Heroku::API.
-      new(api_key: ENV['USER_HEROKU_API_KEY']).
-      post_ps_restart(ENV['HEROKU_APP_NAME'], 'type' => 'web')
+heroku = Heroku::API.new(:api_key => ENV['USER_HEROKU_API_KEY'])
+
+namespace :herokuapp do
+  task :analyze do
+	response = heroku.get_ps(ENV['HEROKU_APP_NAME'])
+	puts response.body
+  end
+  task :restart do
+  	puts "restarting the app" +  ENV['HEROKU_APP_NAME']
+    heroku.post_ps_restart(ENV['HEROKU_APP_NAME'], 'type' => 'web')
   end
 end
