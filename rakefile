@@ -1,4 +1,4 @@
-namespace :heroku do
+task :heroku => :environment do
   desc 'restarts all the heroku dynos so we can control when they restart'
   task :implode do
     Heroku::API.
