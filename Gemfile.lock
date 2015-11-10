@@ -10,6 +10,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  excon
   heroku-api
 
 BUNDLED WITH
