@@ -1,11 +1,17 @@
 require 'heroku-api'
+require 'http'
 
 heroku = Heroku::API.new(:api_key => ENV['USER_HEROKU_API_KEY'])
 
 namespace :herokuapp do
   task :analyze do
-	response = heroku.get_ps(ENV['HEROKU_APP_NAME'])
-	puts response.body
+	response = heroku.get_logs(ENV['HEROKU_APP_NAME'])
+	res = HTTP.get(response.body).body.to_s
+	if res.include? "Error R14 (Memory quota exceeded)"
+	   puts "R14 found! Starting task: 'restart'"
+	   Rake::Task['herokuapp:restart'].invoke
+	end
+	puts "Log Url " + response.body
   end
   task :restart do
   	puts "restarting the app" +  ENV['HEROKU_APP_NAME']
